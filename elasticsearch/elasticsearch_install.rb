@@ -71,6 +71,9 @@ def install_elasticsearch(target_dir, run_dir, log_dir, elasticsearch_version)
   install_dir = "#{target_dir}elasticsearch-#{elasticsearch_version}/"
   # installing elasticsearch aws plugin
   run("#{install_dir}bin/plugin -install elasticsearch/elasticsearch-cloud-aws/2.3.0")
+  # install custom plugins
+  run("#{install_dir}bin/plugin -install mobz/elasticsearch-head")
+  run("#{install_dir}bin/plugin -install lukas-vlcek/bigdesk")
   # replace yaml with new config file
   run("mv elasticsearch.yml #{install_dir}config/elasticsearch.yml")
   puts("Starting elasticsearch in the background. Logs found in \'#{log_dir}elasticsearch.log\'")
